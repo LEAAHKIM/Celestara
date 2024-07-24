@@ -45,14 +45,19 @@ public class TwinMovement : MonoBehaviour
         
         if(Input.GetKey(KeyCode.UpArrow) && jumpsLeft > 0)
         {
-            anim.SetBool("isJumping", true);
             twin2rb.velocity = new Vector2(twin2rb.velocity.x, jumpForce);
             jumpsLeft--;
+            anim.SetBool("isJumping", true);
         } 
 
         if(Input.GetKey(KeyCode.DownArrow))
         {
             twin2rb.velocity = new Vector2(twin2rb.velocity.x, -1 * jumpForce);
+        }
+
+        if (twin2rb.velocity.y < 0)
+        {
+            anim.SetBool("isJumping", true);
         }
     }
 

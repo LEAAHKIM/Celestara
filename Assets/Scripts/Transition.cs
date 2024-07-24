@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Transition : MonoBehaviour
+public class DisplayText : MonoBehaviour
 {
     public GameObject gem;
     public string sceneName;

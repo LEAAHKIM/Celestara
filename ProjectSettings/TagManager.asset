@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - activate
+  - bubbleLight
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ground
+    uniqueID: 3154004811
     locked: 0
