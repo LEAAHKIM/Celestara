@@ -13,6 +13,7 @@ public class LightPower : MonoBehaviour
     private float currentLight;  
     private Animator anim;
     private float fillDuration = 1f;
+    public GameObject firstText;
 
     void Start()
     {
@@ -53,7 +54,14 @@ public class LightPower : MonoBehaviour
             yield return null;
         }
         lightBar.fillAmount = targetAmount;
-        yield  return new WaitForSeconds(3f);
+
+        if(lightBar.fillAmount < 11f)
+        {
+            firstText.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            firstText.SetActive(false);
+        }
+        yield  return new WaitForSeconds(1f);
         lightManager.SetActive(false);
     }
 
@@ -62,4 +70,6 @@ public class LightPower : MonoBehaviour
         anim.Play("lightManagerAnim");
         StartCoroutine(UpdateLightBar(currentLight / maxLight));
     }
+
+
 }
