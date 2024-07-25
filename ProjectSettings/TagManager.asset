@@ -7,6 +7,7 @@ TagManager:
   - ground
   - activate
   - bubbleLight
+  - portal
   layers:
   - Default
   - TransparentFX
@@ -49,4 +50,7 @@ TagManager:
     locked: 0
   - name: ground
     uniqueID: 3154004811
+    locked: 0
+  - name: portal
+    uniqueID: 1757323451
     locked: 0

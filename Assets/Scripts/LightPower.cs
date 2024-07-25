@@ -14,6 +14,9 @@ public class LightPower : MonoBehaviour
     private Animator anim;
     private float fillDuration = 1f;
     public GameObject firstText;
+    private bool firstTime = true;
+    public Camera mainCamera;
+    public float newZoomLevel = 3f;
 
     void Start()
     {
@@ -25,9 +28,9 @@ public class LightPower : MonoBehaviour
     {
         if(other.gameObject.CompareTag("bubbleLight"))
         {
-            light = GameObject.FindWithTag("bubbleLight");
-            Destroy(light);
+            Destroy(other.gameObject);
             IncreaseLight(10); //when object is collected, increase fill by 10 
+
         }
     }
 
@@ -44,7 +47,7 @@ public class LightPower : MonoBehaviour
 
     private IEnumerator UpdateLightBar(float targetAmount)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f); 
         float startFillAmount = lightBar.fillAmount; //current amount 
         float elapsedTime = 0f;
         while(elapsedTime < fillDuration)
@@ -55,11 +58,13 @@ public class LightPower : MonoBehaviour
         }
         lightBar.fillAmount = targetAmount;
 
-        if(lightBar.fillAmount < 11f)
+        if(firstTime)
         {
             firstText.SetActive(true);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
             firstText.SetActive(false);
+            AdjustCameraZoom();
+            firstTime = false;
         }
         yield  return new WaitForSeconds(1f);
         lightManager.SetActive(false);
@@ -71,5 +76,15 @@ public class LightPower : MonoBehaviour
         StartCoroutine(UpdateLightBar(currentLight / maxLight));
     }
 
-
+    private void AdjustCameraZoom()
+    {
+        if(mainCamera.orthographic)
+        {
+            mainCamera.orthographicSize = newZoomLevel; 
+        }
+        else 
+        {
+            mainCamera.fieldOfView = newZoomLevel;
+        }
+    }
 }
